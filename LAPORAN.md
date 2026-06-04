@@ -23,7 +23,7 @@ Efisiensi rute pengiriman barang merupakan faktor krusial bagi UMKM untuk meneka
 2. Otomatisasi Pengambilan Keputusan: Memudahkan pemilik usaha atau kurir dalam mengambil keputusan logistik secara cepat dan akurat tanpa harus menebak-nebak rute manual.
 3. Fleksibilitas Manajemen Rute: Memberikan kemudahan bagi pengguna untuk memperbarui peta jalur distribusi secara mandiri ketika terjadi penambahan cabang toko baru atau perubahan rute jalan.
 
-# BAB 2 | DASAR TEORI
+# BAB 2 - DASAR TEORI
 
 # 2.1 STRUKTUR DATA GRAPH
 
@@ -211,43 +211,9 @@ Aktivitas logistik pada Usaha Mikro, Kecil, dan Menengah (UMKM) sering kali meng
 # 3.2 DESAUN GRAPH
 Desain jaringan distribusi pada sistem ini dimodelkan sebagai Graf Berbobot dan Tidak Berarah (Weighted Undirected Graph). Graf ini merepresentasikan peta logistik riil yang digunakan sebagai studi kasus sistem. Hubungan spasial antar-lokasi dirancang sedemikian rupa agar kurir dapat bergerak secara dua arah (bolak-balik) dengan bobot jarak yang sama.  Berdasarkan data operasional yang terekam pada sistem, berikut adalah rancangan visual model jaringan logistik tersebut:  Keterangan Model Graf Jaringan Jarak:  Gudang Pusat terhubung langsung ke Kurir Denpasar dengan bobot jarak 10 Km.  Gudang Pusat terhubung langsung ke Toko Gianyar dengan bobot jarak 25 Km.  Kurir Denpasar terhubung langsung ke Drop Point Badung dengan bobot jarak 15 Km.  Drop Point Badung terhubung langsung ke Toko Gianyar dengan bobot jarak 30 Km.  
 # 3.3 FLOWCHART SISTEM
-Flowchart (Diagram Alir) di bawah ini menggambarkan logika jalannya sistem pendukung keputusan dari awal menerima input lokasi hingga menghasilkan rekomendasi keputusan akhir menggunakan Algoritma Dijkstra.         [ Mulai ]
-           │
-           ▼
-  [ Inisialisasi Graph ] ➔ (Memuat Node & Edge Awal di Session State)
-           │
-           ▼
- ┌────────────────────────────────────────┐
- │ Input Pilihan Pengguna:                │
- │ 1. Tambah Node/Edge Baru?              │
- │ 2. Hitung Rute Terpendek?              │
- └───────────────────┬────────────────────┘
-                     │
-         ┌───────────┴───────────┐
-         ▼ (Opsi 1)              ▼ (Opsi 2)
-  [ Input Node/Edge ]     [ Pilih Node Asal & Tujuan ]
-         │                       │
-         ▼                       ▼
-  [ Update Memori ]       [ Eksekusi Algoritma Dijkstra ]
-  (List & Matrix)                │
-         │                       ▼
-         │                [ Cari Nilai Jarak Terkecil ]
-         │                [ Jalankan Relaksasi Jarak  ]
-         │                       │
-         │                       ▼
-         │                [ Konstruksi Jalur Terbaik  ]
-         │                       │
-         ▼                       ▼
- ┌────────────────────────────────────────┐
- │ Tampilkan Hasil pada Dashboard:        │
- │ - Rekomendasi Rute Terbaik (Teks)      │
- │ - Total Jarak Pengiriman (Metrik)      │
- │ - Visualisasi Jaringan (Warna Merah)   │
- │ - Log Proses Perhitungan Perulangan    │
- └───────────────────┬────────────────────┘
-                     │
-                     ▼
-                 [ Selesai ]
+Flowchart (Diagram Alir) di bawah ini menggambarkan logika jalannya sistem pendukung keputusan dari awal menerima input lokasi hingga menghasilkan rekomendasi keputusan akhir menggunakan Algoritma Dijkstra.
+
+
 3.4 USE CASE DIAGRAM
 Arsitektur interaksi pengguna (user interaction) terhadap perangkat lunak DSS Logistik Graph ini dirancang dengan satu Aktor utama yaitu Pengguna (Admin Logistik / Pemilik UMKM).  Berikut adalah deskripsi fungsionalitas komponen Use Case sistem:Manage Node (Lokasi): Pengguna memiliki hak akses untuk mendaftarkan nama lokasi logistik baru ke dalam memori sistem secara dinamis.  Manage Edge (Rute & Jarak): Pengguna dapat menghubungkan dua lokasi yang berbeda dan memberikan nilai bobot jarak dalam satuan kilometer.  View Representasi Memori: Pengguna dapat memantau dan mengaudit integritas struktur data internal yang sedang aktif, baik berupa struktur Adjacency List (JSON) maupun tabel Adjacency Matrix.  Calculate Shortest Path: Pengguna dapat memilih titik awal keberangkatan serta titik tujuan konsumen, kemudian memerintahkan sistem untuk melakukan komputasi pencarian rute logistik terbaik.  
 # 3.5 STRUKTUR NODE DAN EDGE
