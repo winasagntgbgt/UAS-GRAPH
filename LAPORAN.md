@@ -31,14 +31,9 @@ Efisiensi rute pengiriman barang merupakan faktor krusial bagi UMKM untuk meneka
 
 Di dalam memori sistem, graf ini dipecah menjadi beberapa bagian utama:
 
-* 
 **Node / Vertex (Titik):** Merepresentasikan lokasi fisik atau entitas logistik. Di file Anda, terdapat **4 Node**: `"Gudang Pusat"` , `"Toko Gianyar"` , `"Kurir Denpasar"` , dan `"Drop Point Badung"`.
 
-
-* 
 **Edge (Sisi/Jalur) & Weight (Bobot):** Merepresentasikan jalur penghubung antar-lokasi beserta jarak/biayanya.
-
-
 
 ---
 
@@ -224,7 +219,9 @@ Bagian ini mendefinisikan detail teknis perancangan objek data yang dialokasikan
 Node merepresentasikan entitas lokasi fisik tempat penyimpanan atau pendistribusian barang logistik. Objek node dirancang menggunakan tipe data string yang ditampung dalam sebuah array dinamis (list). Data node awal pada perancangan ini meliputi:  Node[0] = "Gudang Pusat"Node[1] = "Toko Gianyar"Node[2] = "Kurir Denpasar"Node[3] = "Drop Point Badung"
 
 # 3.5.2 STRUKTUR EDGE DAN BOBOT
-Edge merepresentasikan keterhubungan langsung jalur transportasi darat antarnode, sedangkan Weight menyimpan informasi panjang rute dalam satuan kilometer (km). Pada rancangan aplikasi ini, struktur hubungan tersebut diimplementasikan ke dalam format Adjacency List (Format JSON) sebagai berikut:  JSON{
+Edge merepresentasikan keterhubungan langsung jalur transportasi darat antarnode, sedangkan Weight menyimpan informasi panjang rute dalam satuan kilometer (km). Pada rancangan aplikasi ini, struktur hubungan tersebut diimplementasikan ke dalam format Adjacency List (Format JSON) sebagai berikut:  JSON
+
+```text
   "Gudang Pusat": [
     ["Toko Gianyar", 25],
     ["Kurir Denpasar", 10]
@@ -241,5 +238,5 @@ Edge merepresentasikan keterhubungan langsung jalur transportasi darat antarnode
     ["Toko Gianyar", 30],
     ["Kurir Denpasar", 15]
   ]
-}
+
 Keterangan Struktur: Kunci utama (Key) luar bertindak sebagai titik awal keberangkatan (Node Asal), sedangkan array di dalamnya menyimpan daftar pasangan nama Node Tujuan beserta bobot integernya.  
