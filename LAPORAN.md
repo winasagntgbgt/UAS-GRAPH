@@ -374,8 +374,10 @@ Visualisasi Model Jaringan Jarak: Menggunakan pustaka NetworkX dan Matplotlib un
 log_proses ke dalam komponen ekspander interaktif Streamlit berbasis teks HTML, memberikan transparansi baris demi baris kepada manajemen logistik mengenai cara algoritma mengeliminasi rute memutar yang tidak efisien.
 
 # 4.5 TAMPILAN SISTEM
+Berikut merupakan tampilan dari dashboard sistem graph kami dalam bentuk pdf:
 [tampilan.pdf](https://github.com/user-attachments/files/28675612/tampilan.pdf)
 
+Penjelasan Tampilan:
 1. Panel Kiri: Manajemen Struktur Data Graph & Memori
 Bagian ini berfungsi sebagai pusat kendali untuk mengelola data geografi logistik:
 
@@ -386,10 +388,10 @@ Representasi di Memori: Bagian bawah panel kiri menampilkan opsi tombol radio un
 2. Panel Kanan: Proses Analisis & Rekomendasi Keputusan
 Bagian ini bertindak sebagai panel keluaran (output) utama yang menampilkan hasil penalaran cerdas Algoritma Dijkstra setelah pengguna memilih titik awal dan tujuan lalu menekan tombol 🚀 Analisis & Hitung Rute Terbaik:
 
-💡 Rekomendasi Keputusan Akhir: Menampilkan kotak pengingat berwarna hijau (success alert) yang berisi instruksi jalur logistik mutlak: RUTE TERBAIK: Gudang Pusat Toko Gianyar.
+Rekomendasi Keputusan Akhir: Menampilkan kotak pengingat berwarna hijau (success alert) yang berisi instruksi jalur logistik mutlak: RUTE TERBAIK: Gudang Pusat Toko Gianyar.
 
 Kartu Indikator Metrik: Menampilkan metrik digital 25 Km sebagai total jarak pengiriman, lengkap dengan catatan saran operasional kurir untuk mengoptimalkan bahan bakar di bawahnya.
 
-🖼️ Visualisasi Model Jaringan Jarak: Menampilkan diagram grafis jaringan logistik secara real-time. Lokasi digambarkan dengan lingkaran biru, jalur pengiriman biasa digambarkan dengan garis abu-abu tipis beserta angka jaraknya, dan jalur terbaik yang terpilih otomatis disorot dengan garis merah tebal agar mudah diidentifikasi oleh kurir.
+Visualisasi Model Jaringan Jarak: Menampilkan diagram grafis jaringan logistik secara real-time. Lokasi digambarkan dengan lingkaran biru, jalur pengiriman biasa digambarkan dengan garis abu-abu tipis beserta angka jaraknya, dan jalur terbaik yang terpilih otomatis disorot dengan garis merah tebal agar mudah diidentifikasi oleh kurir.
 
-🕵️ Langkah & Proses Perhitungan (Log Dijkstra): Sebuah menu ekspander di bagian paling bawah yang menampilkan teks kronologi atau jejak audit bagaimana algoritma bekerja di latar belakang (seperti mencatat proses inisialisasi, eksplorasi node, dan kalkulasi relaksasi jarak).
+Langkah & Proses Perhitungan (Log Dijkstra): Sebuah menu ekspander di bagian paling bawah yang menampilkan teks kronologi atau jejak audit bagaimana algoritma bekerja di latar belakang (seperti mencatat proses inisialisasi, eksplorasi node, dan kalkulasi relaksasi jarak).
