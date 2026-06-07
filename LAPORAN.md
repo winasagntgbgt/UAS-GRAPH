@@ -131,10 +131,7 @@ Secara matematis, algoritma ini mengelola tiga jenis informasi utama selama pros
 
 1. **Daftar Jarak (*Distance Table*):** Menyimpan estimasi total jarak/bobot terpendek sementara dari titik awal (*Source Node*) ke setiap lokasi lainnya di dalam graf.
 2. **Daftar Kunjungan (*Visited Set*):** Kumpulan lokasi (*node*) yang jalur terpendeknya sudah dipastikan secara final oleh algoritma, sehingga tidak akan diproses kembali.
-3. 
-**Daftar Penjejakan (*Predecessor/Previous Node*):** Catatan mengenai lokasi sebelumnya yang dilewati guna merekonstruksi urutan jalur dari titik awal hingga mencapai titik tujuan akhir.
-
-
+3. **Daftar Penjejakan (*Predecessor/Previous Node*):** Catatan mengenai lokasi sebelumnya yang dilewati guna merekonstruksi urutan jalur dari titik awal hingga mencapai titik tujuan akhir.
 
 ---
 
@@ -201,7 +198,6 @@ Berdasarkan sifat *greedy*, algoritma menetapkan **Jalur Langsung (Gudang Pusat 
 # 3.1 ANALISIS MASALAH
 Aktivitas logistik pada Usaha Mikro, Kecil, dan Menengah (UMKM) sering kali menghadapi tantangan besar dalam hal efisiensi rute distribusi pengiriman barang. Berdasarkan analisis terhadap proses berjalan, ditemukan beberapa kendala utama yang dihadapi oleh mitra pelaku usaha, antara lain:  Penentuan Rute yang Subjektif: Proses penulisan dan pemilihan rute pengantaran paket dari gudang pusat ke konsumen masih didasarkan pada intuisi kurir atau peta konvensional. Hal ini sering kali memicu pemilihan jalur yang memutar sehingga terjadi pemborosan waktu.  Pembengkakan Biaya Operasional: Rute pengiriman yang tidak optimal berdampak langsung pada tingginya konsumsi bahan bakar kendaraan operational.Keterbatasan Alat Bantu Keputusan: Manajemen logistik tidak memiliki instrumen visual atau sistem komputasi dinamis yang dapat menghitung kombinasi jarak antar-pos logistik (seperti kurir wilayah atau drop point) untuk menghasilkan keputusan jalur terpendek secara real-time.  Melalui pengembangan Decision Support System (DSS) Logistik Graph ini, masalah-masalah di atas diselesaikan dengan memodelkan peta jaringan jalan ke dalam struktur data graf berbobot dan mengotomatisasikannya menggunakan Algoritma Dijkstra. 
 
-# 3.2 DESAUN GRAPH
 # 3.2 DESAIN GRAPH
 Desain jaringan distribusi pada sistem ini dimodelkan sebagai Graf Berbobot dan Tidak Berarah (Weighted Undirected Graph). Graf ini merepresentasikan peta logistik riil yang digunakan sebagai studi kasus sistem. Hubungan spasial antar-lokasi dirancang sedemikian rupa agar kurir dapat bergerak secara dua arah (bolak-balik) dengan bobot jarak yang sama.  Berdasarkan data operasional yang terekam pada sistem, berikut adalah rancangan visual model jaringan logistik tersebut:  Keterangan Model Graf Jaringan Jarak:  Gudang Pusat terhubung langsung ke Kurir Denpasar dengan bobot jarak 10 Km.  Gudang Pusat terhubung langsung ke Toko Gianyar dengan bobot jarak 25 Km.  Kurir Denpasar terhubung langsung ke Drop Point Badung dengan bobot jarak 15 Km.  Drop Point Badung terhubung langsung ke Toko Gianyar dengan bobot jarak 30 Km.  
 
@@ -244,4 +240,59 @@ Edge merepresentasikan keterhubungan langsung jalur transportasi darat antarnode
     ["Kurir Denpasar", 15]
   ]
 
-Keterangan Struktur: Kunci utama (Key) luar bertindak sebagai titik awal keberangkatan (Node Asal), sedangkan array di dalamnya menyimpan daftar pasangan nama Node Tujuan beserta bobot integernya.  
+Keterangan Struktur: Kunci utama (Key) luar bertindak sebagai titik awal keberangkatan (Node Asal), sedangkan array di dalamnya menyimpan daftar pasangan nama Node Tujuan beserta bobot integernya.
+
+```
+
+BAB IV — IMPLEMENTASI SISTEM
+# 4.1 Antarmuka Dasbor dan Manajemen Data Jaringan
+Sistem menyediakan dasbor interaktif berbasis web yang dibagi menjadi beberapa modul manajemen logistik secara dinamis:  
+
+# 4.1.1 Modul Manajemen Struktur Data Graph
+
+Fungsi Tambah Lokasi Baru (Node): Fitur input teks untuk mendaftarkan titik distribusi baru (seperti cabang toko atau pos kurir) ke dalam memori sistem secara dinamis. 
+
+Fungsi Tambah Rute Jalan Baru (Edge + Weight): Fitur dropdown untuk memilih Lokasi Asal , Lokasi Tujuan , dan input numerik Jarak / Bobot (Km). Hubungan ini disimpan secara bolak-balik (undirected graph).
+
+# 4.1.2 Modul Representasi Memori Terintegrasi
+
+Adjacency List: Menampilkan struktur data graf berbasis objek teks (JSON) yang menjabarkan setiap lokasi beserta daftar rute tujuan dan bobotnya.  
+
+Adjacency Matrix: Mengonversi data graf menjadi tabel matriks dua dimensi. Irisan baris dan kolom menampilkan angka jarak, sedangkan lokasi yang tidak terhubung langsung ditandai dengan nilai tak hingga (inf).  
+
+4.2 Simulasi Pengambilan Keputusan dan Output Sistem
+Modul Proses Analisis & Rekomendasi Keputusan berfungsi mengolah rute pengiriman barang melalui parameter berikut:
+
+# 4.2.1 Pengondisian Parameter Uji Coba
+Titik Awal Pengiriman (Gudang): Gudang Pusat.  
+
+Alamat Tujuan Konsumen: Toko Gianyar.  
+
+# 4.2.2 Hasil dan Output Komputasi Sistem
+Ketika tombol Analisis & Hitung Rute Terbaik ditekan , sistem mengeksekusi Algoritma Dijkstra  dan langsung menyajikan hasil pada dasbor:  
+
+Rekomendasi Rute Mutlak: Memunculkan notasi sukses pada panel utama: RUTE TERBAIK: Gudang Pusat Toko Gianyar.  
+
+Informasi Beban Jarak: Menampilkan kartu metrik 25 Km sebagai total efisiensi pengiriman.  
+
+Saran Operasional Bisnis: Menyertakan instruksi otomatis: "Saran Operasional: Kurir direkomendasikan melewati rute di atas untuk mengoptimalkan efisiensi bahan bakar.".  
+
+# 4.2.3 Visualisasi Jaringan Jarak
+Aplikasi secara dinamis menggambarkan peta topologi jaringan logistik. Seluruh lokasi digambarkan sebagai lingkaran biru (node), dan rute digambarkan sebagai garis abu-abu (edge) lengkap dengan teks angka jarak. Jalur terbaik yang terpilih (Gudang Pusat → Toko Gianyar) otomatis disorot dengan garis berwarna merah tebal untuk mempermudah identifikasi kurir.  
+
+# 4.2.4 Log Langkah Perhitungan (Audit Trace)
+Pada bagian bawah antarmuka, komponen Langkah & Process Perhitungan (Log Dijkstra) menjabarkan kronologi logika algoritma di memori:  
+
+Inisialisasi: Memulai pencarian dari Gudang Pusat.  
+
+Eksplorasi Simpul awal: Mengunjungi Gudang Pusat (Jarak: 0 km).  
+
+Relaksasi Sisi 1: Memeriksa rute ke Toko Gianyar: 0+25=25 km (Lebih cepat! Jarak diperbarui).  
+
+Relaksasi Sisi 2: Memeriksa rute ke Kurir Denpasar: 0+10=10 km (Lebih cepat! Jarak diperbarui).  
+
+Eksplorasi Simpul 2: Mengunjungi Kurir Denpasar (Jarak: 10 km). 
+
+Relaksasi Sisi 3: Memeriksa rute ke Drop Point Badung melalui kurir: 10+15=25 km (Lebih cepat! Jarak diperbarui).  
+
+Keputusan: Rute memutar dari Drop Point Badung ke Toko Gianyar membutuhkan tambahan 30 km (total 55 km), sehingga sistem mendeteksinya lebih lambat dan memilih rute langsung (25 km).  
