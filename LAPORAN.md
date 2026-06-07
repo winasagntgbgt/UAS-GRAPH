@@ -375,6 +375,7 @@ log_proses ke dalam komponen ekspander interaktif Streamlit berbasis teks HTML, 
 
 # 4.5 TAMPILAN SISTEM
 Berikut merupakan tampilan dari dashboard sistem graph kami dalam bentuk pdf:
+
 [tampilan.pdf](https://github.com/user-attachments/files/28675612/tampilan.pdf)
 
 Penjelasan Tampilan:
@@ -395,3 +396,20 @@ Kartu Indikator Metrik: Menampilkan metrik digital 25 Km sebagai total jarak pen
 Visualisasi Model Jaringan Jarak: Menampilkan diagram grafis jaringan logistik secara real-time. Lokasi digambarkan dengan lingkaran biru, jalur pengiriman biasa digambarkan dengan garis abu-abu tipis beserta angka jaraknya, dan jalur terbaik yang terpilih otomatis disorot dengan garis merah tebal agar mudah diidentifikasi oleh kurir.
 
 Langkah & Proses Perhitungan (Log Dijkstra): Sebuah menu ekspander di bagian paling bawah yang menampilkan teks kronologi atau jejak audit bagaimana algoritma bekerja di latar belakang (seperti mencatat proses inisialisasi, eksplorasi node, dan kalkulasi relaksasi jarak).
+
+BAB VI — SKENARIO DAN HASIL PENGUJIAN
+6.1 Metodologi PengujianPengujian sistem dilakukan menggunakan metode Black-Box Testing, yaitu pengujian yang berfokus pada fungsionalitas masukan (input) dan keluaran (output) aplikasi tanpa harus melihat atau menguji struktur kode internal secara langsung. Tujuan dari pengujian ini adalah memastikan bahwa seluruh fitur antarmuka dasbor web Streamlit dapat merespons perintah pengguna secara valid dan Algoritma Dijkstra menghasilkan keputusan rute yang akurat.6.2 Tabel Skenario Pengujian Sistem
+## 6.2 Tabel Skenario Pengujian Sistem
+
+| ID Kasus | Fitur / Komponen yang Diuji | Deskripsi Tindakan (Masukan) | Hasil yang Diharapkan (Keluaran) | Status |
+| :--- | :--- | :--- | :--- | :---: |
+| **TC-01** | **Inisialisasi Data Awal (*Session State*)** | Membuka aplikasi pertama kali pada alamat `http://localhost:8501/`. | Sistem otomatis memuat 4 lokasi awal (*Gudang Pusat, Toko Gianyar, Kurir Denpasar, Drop Point Badung*) beserta relasi jalurnya di memori. | **Berhasil** |
+| **TC-02** | **Tambah Lokasi Baru (*Node*)** | Mengisi input teks nama lokasi baru (Misal: "Toko C") pada panel kiri lalu menekan tombol "Tambah Lokasi". | Elemen "Toko C" berhasil didaftarkan ke memori tanpa menghapus data lokasi yang sudah ada sebelumnya. | **Berhasil** |
+| **TC-03** | **Tambah Rute Jalan Baru (*Edge*)** | Memilih Lokasi Asal: "Gudang Pusat", Lokasi Tujuan: "Toko Gianyar", mengisi bobot jarak: "10 km", lalu menekan "Hubungkan Rute". | Rute baru tersimpan di memori. Data *Adjacency List* dan *Adjacency Matrix* otomatis diperbarui. | **Berhasil** |
+| **TC-04** | **Peralihan Representasi Graf** | Mengubah tombol radio (*radio button*) dari pilihan "Adjacency List" ke "Adjacency Matrix". | Tampilan tabel data di panel kiri berubah secara instan dari format notasi teks JSON menjadi tabel matriks 2D Pandas DataFrame. | **Berhasil** |
+| **TC-05** | **Validasi Input Rute Sama** | Memilih Lokasi Asal dan Lokasi Tujuan yang sama (Misal: Asal: "Gudang Pusat", Tujuan: "Gudang Pusat") lalu menekan "Hubungkan Rute". | Sistem menolak perintah dan menampilkan pesan galat (*error message*): "Lokasi asal dan tujuan tidak boleh sama." | **Berhasil** |
+| **TC-06** | **Komputasi Keputusan Rute Terpendek** | Memilih Titik Awal: "Gudang Pusat", Tujuan: "Toko Gianyar", lalu menekan tombol "🚀 Analisis & Hitung Rute Terbaik". | Sistem menampilkan kotak informasi hijau bertuliskan `RUTE TERBAIK: Gudang Pusat Toko Gianyar` dan kartu metrik `25 Km`. | **Berhasil** |
+| **TC-07** | **Pewarnaan Dinamis Jaringan Jarak** | Memperhatikan diagram grafis jaringan logistik pada panel kanan setelah menekan tombol analisis rute. | Objek peta jaringan ter-render dengan rapi. Garis penghubung rute terpilih (**Gudang Pusat -> Toko Gianyar**) otomatis berubah menjadi **merah tebal**, sedangkan jalur lain tetap abu-abu tipis. | **Berhasil** |
+| **TC-08** | **Transparansi Log Algoritma (*Audit Trace*)** | Membuka menu lipat (*expander*) "Langkah & Proses Perhitungan (Log Dijkstra)" setelah melakukan analisis. | Sistem menampilkan kronologi pelacakan matematis ($0 + 25 = 25\text{ km}$) baris demi baris berbasis teks HTML secara urut dan transparan. | **Berhasil** |
+
+Kesimpulan PengujianBerdasarkan seluruh rangkaian uji coba yang telah dilakukan melalui 8 skenario di atas, aplikasi DSS Logistik Graph dinyatakan memenuhi spesifikasi fungsionalitas yang diharapkan dengan tingkat keberhasilan 100% (Semua Kasus Berstatus Berhasil).Sistem terbukti mampu mengelola penyimpanan graf secara dinamis di memori, menyajikan visualisasi jaringan yang interaktif kepada manajemen logistik, serta mengeksekusi Algoritma Dijkstra dengan hasil kalkulasi jarak yang akurat dan dapat diaudit secara terbuka melalui fitur Log Perhitungan.
