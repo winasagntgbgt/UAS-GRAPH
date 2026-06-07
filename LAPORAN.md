@@ -264,6 +264,8 @@ Adjacency Matrix: Mengonversi data graf menjadi tabel matriks dua dimensi. Irisa
 Modul Proses Analisis & Rekomendasi Keputusan berfungsi mengolah rute pengiriman barang melalui parameter berikut:
 
 # 4.2.1 Pengondisian Parameter Uji Coba
+<img width="1002" height="673" alt="Cuplikan layar 2026-06-07 113149" src="https://github.com/user-attachments/assets/4b1187f7-4058-4ecb-b84a-4f957b9f238b" />
+
 Titik Awal Pengiriman (Gudang): Gudang Pusat.  
 
 Alamat Tujuan Konsumen: Toko Gianyar.  
@@ -370,3 +372,24 @@ for u, v in G.edges():
 ```
 Visualisasi Model Jaringan Jarak: Menggunakan pustaka NetworkX dan Matplotlib untuk menggambar objek topologi peta distribusi. Kode di atas melakukan pemindaian kondisi (if): jika jalur jalan termasuk dalam rute terbaik hasil komputasi Dijkstra, garis rute otomatis disorot dengan warna merah tebal (#ff4b4b, tebal 4.0), sedangkan rute alternatif lainnya ditandai dengan garis abu-abu tipis biasa.Log Proses Perhitungan (Audit Trace): Mengeluarkan isi array 
 log_proses ke dalam komponen ekspander interaktif Streamlit berbasis teks HTML, memberikan transparansi baris demi baris kepada manajemen logistik mengenai cara algoritma mengeliminasi rute memutar yang tidak efisien.
+
+# 4.5 TAMPILAN SISTEM
+[tampilan.pdf](https://github.com/user-attachments/files/28675612/tampilan.pdf)
+
+1. Panel Kiri: Manajemen Struktur Data Graph & Memori
+Bagian ini berfungsi sebagai pusat kendali untuk mengelola data geografi logistik:
+
+Menu Tambah Lokasi & Rute Baru: Terdapat menu lipat (expander) interaktif untuk menambahkan lokasi baru (Node) serta menghubungkan rute antar-lokasi beserta bobot jaraknya (Edge + Weight).
+
+Representasi di Memori: Bagian bawah panel kiri menampilkan opsi tombol radio untuk melihat bagaimana graf disimpan secara langsung di dalam memori komputer. Pada gambar, sistem sedang menampilkan format Adjacency List berbasis struktur data JSON (misalnya, memperlihatkan hubungan "Gudang Pusat" yang terhubung ke "Toko Gianyar" dengan bobot 25).
+
+2. Panel Kanan: Proses Analisis & Rekomendasi Keputusan
+Bagian ini bertindak sebagai panel keluaran (output) utama yang menampilkan hasil penalaran cerdas Algoritma Dijkstra setelah pengguna memilih titik awal dan tujuan lalu menekan tombol 🚀 Analisis & Hitung Rute Terbaik:
+
+💡 Rekomendasi Keputusan Akhir: Menampilkan kotak pengingat berwarna hijau (success alert) yang berisi instruksi jalur logistik mutlak: RUTE TERBAIK: Gudang Pusat Toko Gianyar.
+
+Kartu Indikator Metrik: Menampilkan metrik digital 25 Km sebagai total jarak pengiriman, lengkap dengan catatan saran operasional kurir untuk mengoptimalkan bahan bakar di bawahnya.
+
+🖼️ Visualisasi Model Jaringan Jarak: Menampilkan diagram grafis jaringan logistik secara real-time. Lokasi digambarkan dengan lingkaran biru, jalur pengiriman biasa digambarkan dengan garis abu-abu tipis beserta angka jaraknya, dan jalur terbaik yang terpilih otomatis disorot dengan garis merah tebal agar mudah diidentifikasi oleh kurir.
+
+🕵️ Langkah & Proses Perhitungan (Log Dijkstra): Sebuah menu ekspander di bagian paling bawah yang menampilkan teks kronologi atau jejak audit bagaimana algoritma bekerja di latar belakang (seperti mencatat proses inisialisasi, eksplorasi node, dan kalkulasi relaksasi jarak).
