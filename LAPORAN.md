@@ -1,5 +1,6 @@
 # LAPORAN UAS STRUKTUR DATA
 # ANGGOTA KELOMPOK
+
 I Kadek Dwi Andika
 I Gede Winasa Edy Purnama
 Kristian Putra Santosa
@@ -23,9 +24,10 @@ Efisiensi rute pengiriman barang merupakan faktor krusial bagi UMKM untuk meneka
 2. Otomatisasi Pengambilan Keputusan: Memudahkan pemilik usaha atau kurir dalam mengambil keputusan logistik secara cepat dan akurat tanpa harus menebak-nebak rute manual.
 3. Fleksibilitas Manajemen Rute: Memberikan kemudahan bagi pengguna untuk memperbarui peta jalur distribusi secara mandiri ketika terjadi penambahan cabang toko baru atau perubahan rute jalan.
 
-# BAB 2 - DASAR TEORI
+# BAB II - DASAR TEORI
 
 # 2.1 STRUKTUR DATA GRAPH
+Berikut merupakan penjelasan dari struktur data yang digunakan pada program graph kami.
 
 ### 2.1.1 KOMPONEN UTAMA GRAPH
 
@@ -126,7 +128,7 @@ Graph ini menggunakan Algoritma Dijkstra, yaitu adalah sebuah algoritma *greedy*
 
 Di dalam Sistem Pendukung Keputusan (DSS) Logistik ini, Algoritma Dijkstra berperan sebagai mesin pemroses utama (*core engine*) pada fitur "Analisis & Hitung Rute Terbaik" untuk menghasilkan rekomendasi rute distribusi barang yang paling optimal bagi pelaku UMKM.
 
-# 2.1.1 PRINSIP KERJA ALGORITMA
+# 2.2.1 PRINSIP KERJA ALGORITMA
 Secara matematis, algoritma ini mengelola tiga jenis informasi utama selama proses komputasi berlangsung:
 
 1. **Daftar Jarak (*Distance Table*):** Menyimpan estimasi total jarak/bobot terpendek sementara dari titik awal (*Source Node*) ke setiap lokasi lainnya di dalam graf.
@@ -135,7 +137,7 @@ Secara matematis, algoritma ini mengelola tiga jenis informasi utama selama pros
 
 ---
 
-### **2. Tahapan Simulasi Perhitungan Berdasarkan Data Aplikasi**
+# 2.2.2 Tahapan Simulasi Perhitungan Berdasarkan Data Aplikasi**
 
 Ketika pengguna menetapkan **Gudang Pusat** sebagai titik awal dan **Toko Gianyar** sebagai alamat tujuan konsumen , Algoritma Dijkstra di dalam memori melakukan kalkulasi melalui langkah-langkah berikut:
 
@@ -194,7 +196,7 @@ Algoritma membandingkan dua opsi akumulasi bobot terkecil untuk mencapai `Toko G
 
 Berdasarkan sifat *greedy*, algoritma menetapkan **Jalur Langsung (Gudang Pusat $\rightarrow$ Toko Gianyar)** sebagai hasil final karena memiliki nilai bobot terkecil (25). Urutan rute inilah yang kemudian ditampilkan oleh sistem sebagai rekomendasi keputusan kepada pengguna.
 
-# BAB 3 – ANALISIS DAN PERANCANGAN
+# BAB III – ANALISIS DAN PERANCANGAN
 # 3.1 ANALISIS MASALAH
 Aktivitas logistik pada Usaha Mikro, Kecil, dan Menengah (UMKM) sering kali menghadapi tantangan besar dalam hal efisiensi rute distribusi pengiriman barang. Berdasarkan analisis terhadap proses berjalan, ditemukan beberapa kendala utama yang dihadapi oleh mitra pelaku usaha, antara lain:  Penentuan Rute yang Subjektif: Proses penulisan dan pemilihan rute pengantaran paket dari gudang pusat ke konsumen masih didasarkan pada intuisi kurir atau peta konvensional. Hal ini sering kali memicu pemilihan jalur yang memutar sehingga terjadi pemborosan waktu.  Pembengkakan Biaya Operasional: Rute pengiriman yang tidak optimal berdampak langsung pada tingginya konsumsi bahan bakar kendaraan operational.Keterbatasan Alat Bantu Keputusan: Manajemen logistik tidak memiliki instrumen visual atau sistem komputasi dinamis yang dapat menghitung kombinasi jarak antar-pos logistik (seperti kurir wilayah atau drop point) untuk menghasilkan keputusan jalur terpendek secara real-time.  Melalui pengembangan Decision Support System (DSS) Logistik Graph ini, masalah-masalah di atas diselesaikan dengan memodelkan peta jaringan jalan ke dalam struktur data graf berbobot dan mengotomatisasikannya menggunakan Algoritma Dijkstra. 
 
@@ -244,7 +246,7 @@ Keterangan Struktur: Kunci utama (Key) luar bertindak sebagai titik awal keberan
 
 ```
 
-BAB IV — IMPLEMENTASI 
+# BAB IV — IMPLEMENTASI 
 # 4.1 IMPLEMENTASI PROGRAM
 Sistem menyediakan dasbor interaktif berbasis web yang dibagi menjadi beberapa modul manajemen logistik secara dinamis:  
 
@@ -397,9 +399,11 @@ Visualisasi Model Jaringan Jarak: Menampilkan diagram grafis jaringan logistik s
 
 Langkah & Proses Perhitungan (Log Dijkstra): Sebuah menu ekspander di bagian paling bawah yang menampilkan teks kronologi atau jejak audit bagaimana algoritma bekerja di latar belakang (seperti mencatat proses inisialisasi, eksplorasi node, dan kalkulasi relaksasi jarak).
 
-BAB VI — SKENARIO DAN HASIL PENGUJIAN
-6.1 Metodologi PengujianPengujian sistem dilakukan menggunakan metode Black-Box Testing, yaitu pengujian yang berfokus pada fungsionalitas masukan (input) dan keluaran (output) aplikasi tanpa harus melihat atau menguji struktur kode internal secara langsung. Tujuan dari pengujian ini adalah memastikan bahwa seluruh fitur antarmuka dasbor web Streamlit dapat merespons perintah pengguna secara valid dan Algoritma Dijkstra menghasilkan keputusan rute yang akurat.6.2 Tabel Skenario Pengujian Sistem
-## 6.2 Tabel Skenario Pengujian Sistem
+# BAB V — PENGUJIAN DAN ANALISIS
+# 5.1 Metodologi Pengujian
+Pengujian sistem dilakukan menggunakan metode Black-Box Testing, yaitu pengujian yang berfokus pada fungsionalitas masukan (input) dan keluaran (output) aplikasi tanpa harus melihat atau menguji struktur kode internal secara langsung. Tujuan dari pengujian ini adalah memastikan bahwa seluruh fitur antarmuka dasbor web Streamlit dapat merespons perintah pengguna secara valid dan Algoritma Dijkstra menghasilkan keputusan rute yang akurat.6.2 Tabel Skenario Pengujian Sistem
+
+## 5.2 Tabel Skenario Pengujian Sistem
 
 | ID Kasus | Fitur / Komponen yang Diuji | Deskripsi Tindakan (Masukan) | Hasil yang Diharapkan (Keluaran) | Status |
 | :--- | :--- | :--- | :--- | :---: |
@@ -412,4 +416,81 @@ BAB VI — SKENARIO DAN HASIL PENGUJIAN
 | **TC-07** | **Pewarnaan Dinamis Jaringan Jarak** | Memperhatikan diagram grafis jaringan logistik pada panel kanan setelah menekan tombol analisis rute. | Objek peta jaringan ter-render dengan rapi. Garis penghubung rute terpilih (**Gudang Pusat -> Toko Gianyar**) otomatis berubah menjadi **merah tebal**, sedangkan jalur lain tetap abu-abu tipis. | **Berhasil** |
 | **TC-08** | **Transparansi Log Algoritma (*Audit Trace*)** | Membuka menu lipat (*expander*) "Langkah & Proses Perhitungan (Log Dijkstra)" setelah melakukan analisis. | Sistem menampilkan kronologi pelacakan matematis ($0 + 25 = 25\text{ km}$) baris demi baris berbasis teks HTML secara urut dan transparan. | **Berhasil** |
 
+# 5.3 ANALISIS HASIL
 Kesimpulan PengujianBerdasarkan seluruh rangkaian uji coba yang telah dilakukan melalui 8 skenario di atas, aplikasi DSS Logistik Graph dinyatakan memenuhi spesifikasi fungsionalitas yang diharapkan dengan tingkat keberhasilan 100% (Semua Kasus Berstatus Berhasil).Sistem terbukti mampu mengelola penyimpanan graf secara dinamis di memori, menyajikan visualisasi jaringan yang interaktif kepada manajemen logistik, serta mengeksekusi Algoritma Dijkstra dengan hasil kalkulasi jarak yang akurat dan dapat diaudit secara terbuka melalui fitur Log Perhitungan.
+
+# 5.4 ANALISIS KOMPLEKSITAS ALGORITMA
+
+Analisis kompleksitas digunakan untuk mengukur efisiensi algoritma yang diimplementasikan pada aplikasi Decision Support System (DSS) Logistik Graph. Analisis ini menggunakan Notasi Asimptotik (Big-O) yang dibagi menjadi dua aspek: Kompleksitas Waktu (Time Complexity) dan Kompleksitas Ruang (Space Complexity).
+
+Definisi Variabel:
+
+* V = Jumlah Nodes (Simpul / Jumlah Lokasi Logistik)
+* E = Jumlah Edges (Sisi / Jumlah Jalur Penghubung)
+
+# 5.5 KOMPLEKSITAS WAKTU
+Logika pencarian rute terpendek pada kode program dieksekusi melalui fungsi dijkstra_shortest_path() menggunakan struktur matriks ketetanggaan (Adjacency Matrix) berukuran V x V:
+
+1. Inisialisasi Awal: Mengatur array jarak awal (distances) ke seluruh simpul membutuhkan waktu sebesar O(V).
+2. Perulangan Utama (Outer Loop): Algoritma melakukan iterasi sebanyak V kali untuk memastikan seluruh simpul dieksplorasi.
+3. Pencarian Simpul Minimum (Inner Loop 1): Di dalam perulangan utama, sistem memindai array sepanjang V elemen untuk mencari simpul dengan nilai jarak terkecil yang belum dikunjungi. Proses ini memakan waktu O(V).
+4. Relaksasi Sisi (Inner Loop 2): Sistem melakukan perulangan kembali sebanyak V kali untuk memeriksa dan memperbarui jarak ke simpul-simpul tetangganya melalui baris Adjacency Matrix. Proses ini membutuhkan waktu O(V).
+
+Karena proses pencarian simpul minimum dan relaksasi sisi berada di dalam perulangan utama, maka perhitungan totalnya adalah:
+Total Kompleksitas Waktu = V x (O(V) + O(V)) = V x O(2V) = O(V^2)
+
+Dengan demikian, Kompleksitas Waktu Terburuk (Worst-case Time Complexity) untuk fungsi Dijkstra pada sistem ini adalah O(V^2) (Kuadratik).
+
+# 5.5.1 OPERASI MANIPULASI GRAPH
+
+* Tambah Lokasi Baru (Node): Menambahkan elemen string ke dalam array list Python menggunakan operasi .append() hanya membutuhkan waktu konstan, yaitu O(1).
+* Transformasi Matriks (get_adjacency_matrix): Untuk membangun tabel matriks dari daftar objek teks JSON, sistem memerlukan perulangan bersenang (nested loop) guna memetakan seluruh baris dan kolom. Kompleksitas waktunya adalah O(V^2).
+
+# 5.6 KOMPLEKSITAS RUANG
+Kompleksitas ruang mengukur seberapa besar memori yang dialokasikan selama aplikasi berjalan untuk menyimpan struktur jaringan distribusi:
+
+1. Penyimpanan Adjacency List (graph_list): Menyimpan representasi graf dalam format kamus teks (JSON). Struktur ini hanya merekam simpul dan rute yang benar-benar ada, sehingga ruang memori yang dibutuhkan adalah O(V + E).
+2. Penyimpanan Adjacency Matrix: Ketika sistem mentransformasikan data menjadi bentuk tabel dua dimensi (V x V), memori komputer akan mengalokasikan ruang untuk setiap sel koordinat secara mutlak, sehingga ruang penyimpanan yang digunakan adalah O(V^2).
+3. Array Pendukung Dijkstra: Array distances, visited, dan parent masing-masing menyimpan data sepanjang jumlah simpul distribusi, yang membutuhkan ruang sebesar O(3V) = O(V).
+
+Secara keseluruhan, penggunaan memori tertinggi pada aplikasi ini didominasi oleh pembuatan matriks dua dimensi, sehingga Kompleksitas Ruang (Space Complexity) dari sistem ini adalah O(V^2).
+
+# BAB VI — KESIMPULAN
+# 6.1 KESINMPULAN
+Berdasarkan seluruh tahapan analisis, perancangan, dan pengujian sistem, dapat disimpulkan bahwa:
+1. Solusi Distribusi Tepat Sasaran: Aplikasi berhasil mengatasi masalah penentuan rute logistik UMKM yang subjektif dengan menggantinya menggunakan perhitungan komputasi graf yang pasti dan objektif.
+2. Akurasi Algoritma & Visualisasi: Algoritma Dijkstra terbukti 100% akurat dalam menemukan rute terpendek (Gudang Pusat $\rightarrow$ Toko Gianyar sejauh 25 Km). Fitur visualisasi garis merah tebal dan log perhitungan berhasil memberikan transparansi rute secara instan kepada manajemen.
+3. Struktur Data Dinamis: Berkat implementasi Adjacency List dan Adjacency Matrix di dalam Session State, admin dapat menambah lokasi (node) maupun rute jalan (edge) baru sewaktu-waktu secara dinamis tanpa merusak data lama.
+4. Performa Ringan & Efisien: Dengan kompleksitas waktu $O(V^2)$, sistem memiliki performa kuadratik yang sangat responsif dan ringan untuk menangani data operasional logistik skala menengah secara real-time.
+5. Kesiapan Sistem: Hasil Black-Box Testing dengan tingkat kelulusan 100% membuktikan sistem ini valid, bebas dari kesalahan fungsi, dan siap diimplementasikan untuk memangkas jarak tempuh serta menghemat biaya operasional bahan bakar kurir.
+
+# 6.2 SARAN PENGEMBANGAN
+Integrasi dengan Live Google Maps API
+
+Deskripsi: Mengganti input bobot jarak manual dengan data riil dari Google Maps API.
+
+Manfaat: Sistem dapat otomatis mengambil data jarak nyata serta mempertimbangkan kondisi kemacetan lalu lintas (traffic) secara real-time saat kurir akan berangkat.
+
+Penerapan Algoritma Pendukung (Multi-Drop / TSP)
+
+Deskripsi: Mengembangkan algoritma untuk kebutuhan pengiriman ke banyak lokasi sekaligus dalam satu rute jalan (menggunakan metode Traveling Salesperson Problem atau Vehicle Routing Problem).
+
+Manfaat: Jika kurir harus mengantar barang ke 3 atau 4 toko sekaligus, sistem bisa mengurutkan toko mana yang harus dikunjungi terlebih dahulu agar rutenya tetap menjadi yang paling pendek dan tidak memutar.
+
+Manajemen Armada (Vehicle Capacity Constraints)
+
+Deskripsi: Menambahkan parameter kapasitas muatan kendaraan (misal: kapasitas motor maksimal 20 kg, mobil boks maksimal 500 kg) dan jumlah armada yang tersedia.
+
+Manfaat: Sistem tidak hanya menyarankan rute terpendek, tetapi juga bisa membagi volume barang ke armada yang paling sesuai secara otomatis agar tidak ada kendaraan yang kelebihan muatan.
+
+Sistem Multi-User dan Hak Akses (RBAC)
+
+Deskripsi: Membuat fitur halaman login untuk memisahkan hak akses pengguna, misalnya antara Admin Logistik, Pemilik Toko/UMKM, dan Kurir.
+
+Manfaat: Pemilik toko dapat melihat laporan efisiensi, admin dapat mengubah struktur peta distribusi, sementara kurir hanya bisa melihat visualisasi rute terbaik yang ditugaskan kepada mereka melalui perangkat seluler (mobile-friendly UI).
+
+Penyimpanan Data Permanen (Database Integration)
+
+Deskripsi: Migrasi penyimpanan data dari Streamlit Session State (memori sementara) ke sistem basis data relasional seperti PostgreSQL atau MySQL.
+
+Manfaat: Data titik lokasi, jarak rute, dan riwayat pengantaran barang akan tersimpan secara permanen dan tidak akan hilang meskipun server aplikasi dimatikan atau di-restart.
