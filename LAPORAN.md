@@ -297,7 +297,10 @@ Relaksasi Sisi 3: Memeriksa rute ke Drop Point Badung melalui kurir: 10+15=25 k
 
 Keputusan: Rute memutar dari Drop Point Badung ke Toko Gianyar membutuhkan tambahan 30 km (total 55 km), sehingga sistem mendeteksinya lebih lambat dan memilih rute langsung (25 km). 
 
-4.1 Manajemen Memori dan Representasi GrafSistem mempertahankan data jaringan logistik secara dinamis di dalam memori server menggunakan fitur Session State Streamlit dan mengonversinya ke dalam dua bentuk representasi graf:Pythonif 'nodes' not in st.session_state:
+# 4.3 MANAJEMEN MEMORI DAN REPRESENTASI GRAF
+Sistem mempertahankan data jaringan logistik secara dinamis di dalam memori server menggunakan fitur Session State Streamlit dan mengonversinya ke dalam dua bentuk representasi graf:
+```
+if 'nodes' not in st.session_state:
     st.session_state.nodes = ["Gudang Pusat", "Toko Gianyar", "Kurir Denpasar", "Drop Point Badung"]
 
 if 'graph_list' not in st.session_state:
@@ -307,7 +310,10 @@ if 'graph_list' not in st.session_state:
         "Kurir Denpasar": [("Gudang Pusat", 10), ("Drop Point Badung", 15)],
         "Drop Point Badung": [("Toko Gianyar", 30), ("Kurir Denpasar", 15)]
     }
-st.session_state: Mencegah data ter-reset saat pengguna melakukan interaksi atau memuat ulang halaman web.nodes (List): Menyimpan daftar nama lokasi unik sebagai simpul (node).graph_list (Dictionary): Merepresentasikan Adjacency List berbasis pasangan Key-Value. Key bertindak sebagai titik asal, sedangkan Value menyimpan daftar tuple berisi nama lokasi tujuan beserta bobot jaraknya (km).Pythondef get_adjacency_matrix():
+```
+st.session_state: Mencegah data ter-reset saat pengguna melakukan interaksi atau memuat ulang halaman web.nodes (List): Menyimpan daftar nama lokasi unik sebagai simpul (node).graph_list (Dictionary): Merepresentasikan Adjacency List berbasis pasangan Key-Value. Key bertindak sebagai titik asal, sedangkan Value menyimpan daftar tuple berisi nama lokasi tujuan beserta bobot jaraknya (km).
+```
+def get_adjacency_matrix():
     nodes = st.session_state.nodes
     n = len(nodes)
     matrix = [[float('inf')] * n for _ in range(n)]
@@ -318,11 +324,19 @@ st.session_state: Mencegah data ter-reset saat pengguna melakukan interaksi atau
                 if node_v in nodes:
                     matrix[u_idx][nodes.index(node_v)] = weight
     return matrix
-float('inf'): Menginisialisasi seluruh sel dengan nilai tak hingga ($\infty$) untuk menandai lokasi yang belum terhubung langsung.matrix[i][i] = 0: Mengatur nilai diagonal utama menjadi 0, karena jarak dari lokasi ke dirinya sendiri adalah nol.Perulangan for: Memetakan bobot jalan secara dinamis dari bentuk Adjacency List menjadi Adjacency Matrix 2D berbasis indeks baris dan kolom.4.2 Eksekusi Algoritma Dijkstra dan Log KomputasiFungsi dijkstra_shortest_path bertindak sebagai mesin penalar keputusan dengan mencari akumulasi rute berbobot terkecil, sekaligus merekam kronologi pencariannya:Python    distances = [float('inf')] * n
+```
+float('inf'): Menginisialisasi seluruh sel dengan nilai tak hingga ($\infty$) untuk menandai lokasi yang belum terhubung langsung.matrix[i][i] = 0: Mengatur nilai diagonal utama menjadi 0, karena jarak dari lokasi ke dirinya sendiri adalah nol.Perulangan for: Memetakan bobot jalan secara dinamis dari bentuk Adjacency List menjadi Adjacency Matrix 2D berbasis indeks baris dan kolom.
+# 4.4 EKSEKUSI ALGORITMA DJIKSTRA DAN LOG KOMPUTASI
+Fungsi dijkstra_shortest_path bertindak sebagai mesin penalar keputusan dengan mencari akumulasi rute berbobot terkecil, sekaligus merekam kronologi pencariannya: 
+```
+distances = [float('inf')] * n
     distances[start_idx] = 0
     visited = [False] * n
     parent = [-1] * n
-distances: Array pelacak bobot terpendek sementara dari titik awal ke seluruh simpul. Jarak awal diatur bernilai 0.visited & parent: Array boolean visited mencatat simpul yang sudah final dieksplorasi. Array integer parent menyimpan silsilah node pendahulu untuk kebutuhan pelacakan rute balik (backtracking).Python    for _ in range(n):
+```
+distances: Array pelacak bobot terpendek sementara dari titik awal ke seluruh simpul. Jarak awal diatur bernilai 0.visited & parent: Array boolean visited mencatat simpul yang sudah final dieksplorasi. Array integer parent menyimpan silsilah node pendahulu untuk kebutuhan pelacakan rute balik (backtracking).
+```
+for _ in range(n):
         u = -1
         for i in range(n):
             if not visited[i] and (u == -1 or distances[i] < distances[u]): u = i
@@ -336,13 +350,23 @@ distances: Array pelacak bobot terpendek sementara dari titik awal ke seluruh si
                 if new_dist < distances[v]:
                     distances[v] = new_dist
                     parent[v] = u
-Pencarian Nilai Minimum: Perulangan mencari simpul u belum dikunjungi yang memiliki nilai akumulasi distances terkecil (prinsip Greedy).Relaksasi Sisi (new_dist < distances[v]): Membandingkan rute tersimpan dengan rute baru melalui simpul u. Jika rute baru terbukti lebih pendek, array distances dan parent otomatis diperbarui.4.3 Output Dasbor Keputusan dan Visualisasi GrafisBagian ini mengolah hasil komputasi latar belakang menjadi informasi siap pakai pada antarmuka pengguna (Dashboard Interface):Pythonrute_text = " ➡️ ".join([f"**{p}**" for p in shortest_path])
+```
+Pencarian Nilai Minimum: Perulangan mencari simpul u belum dikunjungi yang memiliki nilai akumulasi distances terkecil (prinsip Greedy).Relaksasi Sisi (new_dist < distances[v]): Membandingkan rute tersimpan dengan rute baru melalui simpul u. Jika rute baru terbukti lebih pendek, array distances dan parent otomatis diperbarui.
+# 4.5 OUTPUT DASHBOARD KEPUTUSAN DAN VISUALISASI GRAFIS
+Bagian ini mengolah hasil komputasi latar belakang menjadi informasi siap pakai pada antarmuka pengguna (Dashboard Interface):Python
+```
+rute_text = " ➡️ ".join([f"**{p}**" for p in shortest_path])
 st.success(f"**RUTE TERBAIK:** {rute_text}")
 st.metric(label="Total Jarak Pengiriman", value=f"{total_cost} Km")
-Rekomendasi Keputusan Akhir: Mengonversi array hasil pelacakan balik menjadi teks petunjuk mutlak pengiriman, menghasilkan output: RUTE TERBAIK: Gudang Pusat Toko Gianyar.Metrik Efisiensi: Menampilkan kartu indikator digital bernilai 25 Km berdasarkan nilai akhir indeks tujuan pada array distances.Pythonpath_edges = list(zip(shortest_path, shortest_path[1:]))
+```
+Rekomendasi Keputusan Akhir: Mengonversi array hasil pelacakan balik menjadi teks petunjuk mutlak pengiriman, menghasilkan output: RUTE TERBAIK: Gudang Pusat Toko Gianyar.Metrik Efisiensi: Menampilkan kartu indikator digital bernilai 25 Km berdasarkan nilai akhir indeks tujuan pada array distances.
+```
+path_edges = list(zip(shortest_path, shortest_path[1:]))
 for u, v in G.edges():
     if (u, v) in path_edges or (v, u) in path_edges:
         edge_colors.append('#ff4b4b'); edge_widths.append(4.0)
     else:
         edge_colors.append('#cccccc'); edge_widths.append(1.5)
-Visualisasi Model Jaringan Jarak: Menggunakan pustaka NetworkX dan Matplotlib untuk menggambar objek topologi peta distribusi. Kode di atas melakukan pemindaian kondisi (if): jika jalur jalan termasuk dalam rute terbaik hasil komputasi Dijkstra, garis rute otomatis disorot dengan warna merah tebal (#ff4b4b, tebal 4.0), sedangkan rute alternatif lainnya ditandai dengan garis abu-abu tipis biasa.Log Proses Perhitungan (Audit Trace): Mengeluarkan isi array log_proses ke dalam komponen ekspander interaktif Streamlit berbasis teks HTML, memberikan transparansi baris demi baris kepada manajemen logistik mengenai cara algoritma mengeliminasi rute memutar yang tidak efisien.
+```
+Visualisasi Model Jaringan Jarak: Menggunakan pustaka NetworkX dan Matplotlib untuk menggambar objek topologi peta distribusi. Kode di atas melakukan pemindaian kondisi (if): jika jalur jalan termasuk dalam rute terbaik hasil komputasi Dijkstra, garis rute otomatis disorot dengan warna merah tebal (#ff4b4b, tebal 4.0), sedangkan rute alternatif lainnya ditandai dengan garis abu-abu tipis biasa.Log Proses Perhitungan (Audit Trace): Mengeluarkan isi array 
+log_proses ke dalam komponen ekspander interaktif Streamlit berbasis teks HTML, memberikan transparansi baris demi baris kepada manajemen logistik mengenai cara algoritma mengeliminasi rute memutar yang tidak efisien.
