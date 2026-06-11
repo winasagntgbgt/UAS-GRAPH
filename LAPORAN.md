@@ -1,11 +1,11 @@
-# LAPORAN UAS STRUKTUR DATA
+# LAPORAN DSS OPTIMASI PENGIRIMAN BARANG
 # ANGGOTA KELOMPOK
 
-I Kadek Dwi Andika
+I Kadek Dwi Andika | [2501010085]
 
-I Gede Winasa Edy Purnama
+I Gede Winasa Edy Purnama | [2501010082]
 
-Kristian Putra Santosa
+Kristian Putra Santosa | [2501010348]
 
 # BAB I - PENDAHULUAN
 
